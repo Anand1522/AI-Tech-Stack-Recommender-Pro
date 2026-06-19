@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>🚀 AI Tech Stack Recommender Pro</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+padding:20px;
+min-height:100vh;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+background:#1e293b;
+padding:25px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+h1{
+text-align:center;
+color:#38bdf8;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+color:#cbd5e1;
+margin-bottom:25px;
+}
+
+.form-group{
+margin-bottom:15px;
+}
+
+label{
+display:block;
+margin-bottom:6px;
+font-weight:bold;
+color:#cbd5e1;
+}
+
+select{
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+font-size:15px;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:12px;
+border:none;
+border-radius:8px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.generateBtn{
+background:#38bdf8;
+color:black;
+}
+
+.generateBtn:hover{
+opacity:0.9;
+}
+
+.copyBtn{
+background:#22c55e;
+color:white;
+}
+
+.downloadBtn{
+background:#f59e0b;
+color:black;
+}
+
+.resetBtn{
+background:#ef4444;
+color:white;
+}
+
+.result{
+margin-top:25px;
+background:#0f172a;
+padding:20px;
+border-radius:12px;
+display:none;
+}
+
+.section-title{
+color:#38bdf8;
+margin-top:20px;
+margin-bottom:10px;
+}
+
+.card{
+background:#1e293b;
+padding:12px;
+border-left:4px solid #38bdf8;
+border-radius:8px;
+margin-bottom:10px;
+}
+
+.score-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:10px;
+margin-top:15px;
+}
+
+.score-card{
+background:#1e293b;
+padding:15px;
+border-radius:10px;
+text-align:center;
+}
+
+.score-number{
+font-size:28px;
+font-weight:bold;
+color:#22c55e;
+}
+
+.progress{
+width:100%;
+height:22px;
+background:#334155;
+border-radius:20px;
+overflow:hidden;
+margin-top:8px;
+}
+
+.progress-bar{
+height:100%;
+background:#22c55e;
+width:0%;
+transition:1s;
+}
+
+.tech-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:12px;
+margin-top:10px;
+}
+
+.tech-card{
+background:#1e293b;
+padding:12px;
+border-radius:8px;
+}
+
+.tech-card h4{
+color:#38bdf8;
+margin-bottom:6px;
+}
+
+.roadmap-box{
+background:#1e293b;
+padding:15px;
+border-radius:10px;
+margin-top:10px;
+}
+
+.roadmap-box ol{
+padding-left:25px;
+margin-top:10px;
+}
+
+.roadmap-box li{
+margin-bottom:10px;
+line-height:1.6;
+}
+
+.explanation{
+background:#1e293b;
+padding:15px;
+border-radius:10px;
+margin-top:15px;
+line-height:1.7;
+}
+
+.footer{
+text-align:center;
+margin-top:20px;
+color:#94a3b8;
+font-size:14px;
+}
+
+@media(max-width:768px){
+
+.container{
+padding:18px;
+}
+
+h1{
+font-size:26px;
+}
+
+.score-grid{
+grid-template-columns:1fr;
+}
+
+.tech-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🚀 AI Tech Stack Recommender Pro</h1>
+
+<p class="subtitle">
+Get the best technology stack recommendation based on your project, experience, budget, and team size.
+</p>
+
+<div class="form-group">
+<label>Project Type</label>
+
+<select id="projectType">
+
+<option value="">Select Project Type</option>
+
+<option>E-Commerce Website</option>
+<option>Portfolio Website</option>
+<option>AI Application</option>
+<option>Blog Website</option>
+<option>Chat Application</option>
+<option>Learning Management System</option>
+<option>Task Manager</option>
+<option>Social Media Platform</option>
+
+</select>
+</div>
+
+<div class="form-group">
+<label>Experience Level</label>
+
+<select id="experience">
+
+<option value="">Select Experience Level</option>
+
+<option>Beginner</option>
+<option>Intermediate</option>
+<option>Advanced</option>
+
+</select>
+</div>
+
+<div class="form-group">
+<label>Budget</label>
+
+<select id="budget">
+
+<option value="">Select Budget</option>
+
+<option>Low</option>
+<option>Medium</option>
+<option>High</option>
+
+</select>
+</div>
+
+<div class="form-group">
+<label>Team Size</label>
+
+<select id="teamSize">
+
+<option value="">Select Team Size</option>
+
+<option>1</option>
+<option>2-5</option>
+<option>5+</option>
+
+</select>
+</div>
+
+<button
+class="generateBtn"
+onclick="generateRecommendation()">
+Generate Recommendation
+</button>
+
+<button
+class="copyBtn"
+onclick="copyResults()">
+Copy Recommendation
+</button>
+
+<button
+class="downloadBtn"
+onclick="downloadReport()">
+Download Report
+</button>
+
+<button
+class="resetBtn"
+onclick="resetForm()">
+Reset
+</button>
+
+<div id="result" class="result">
+
+<h2 class="section-title">
+📊 Recommendation Report
+</h2>
+
+<div id="recommendationContent"></div>
+
+</div>
+
+<div class="footer">
+Day 11 • 30 Days 30 AI Websites Challenge
+</div>
+
+</div>
+
+<!-- PART-2 JavaScript starts below -->
+
+<script>
+    
+function generateRecommendation(){
+
+const project =
+document.getElementById("projectType").value;
+
+const experience =
+document.getElementById("experience").value;
+
+const budget =
+document.getElementById("budget").value;
+
+const team =
+document.getElementById("teamSize").value;
+
+if(
+project === "" ||
+experience === "" ||
+budget === "" ||
+team === ""
+){
+alert("Please fill all fields.");
+return;
+}
+
+let frontend="";
+let backend="";
+let database="";
+let auth="";
+let hosting="";
+let architecture="";
+let roadmap=[];
+let explanation="";
+
+let successScore=70;
+let complexityScore=20;
+let learningTime="";
+
+
+/* EXPERIENCE */
+
+if(experience==="Beginner"){
+
+frontend="HTML + CSS + JavaScript";
+backend="Firebase";
+database="Firestore";
+auth="Firebase Authentication";
+
+learningTime="6-12 Weeks";
+
+successScore+=25;
+complexityScore+=10;
+
+}
+
+else if(experience==="Intermediate"){
+
+frontend="React + Tailwind CSS";
+backend="Node.js + Express.js";
+database="MongoDB";
+auth="JWT Authentication";
+
+learningTime="3-6 Months";
+
+successScore+=15;
+complexityScore+=30;
+
+}
+
+else{
+
+frontend="Next.js + TypeScript";
+backend="Node.js + Express.js";
+database="PostgreSQL";
+auth="OAuth + JWT";
+
+learningTime="6-12 Months";
+
+successScore+=10;
+complexityScore+=50;
+
+}
+
+
+/* BUDGET */
+
+if(budget==="Low"){
+
+hosting="Netlify + Render";
+
+successScore+=5;
+
+}
+
+else if(budget==="Medium"){
+
+hosting="Vercel + Supabase";
+
+successScore+=3;
+complexityScore+=5;
+
+}
+
+else{
+
+hosting="AWS Cloud";
+
+complexityScore+=15;
+
+}
+
+
+/* TEAM SIZE */
+
+if(team==="1"){
+
+architecture="Monolithic Architecture";
+
+}
+
+else if(team==="2-5"){
+
+architecture="Modular Architecture";
+
+complexityScore+=10;
+
+}
+
+else{
+
+architecture="Microservices Architecture";
+
+complexityScore+=20;
+
+}
+
+
+/* PROJECT TYPE */
+
+switch(project){
+
+case "Portfolio Website":
+
+roadmap=[
+"Learn HTML",
+"Learn CSS",
+"Learn JavaScript",
+"Responsive Design",
+"Portfolio Sections",
+"Deployment"
+];
+
+successScore+=5;
+
+explanation=
+"Portfolio websites are excellent for showcasing projects, skills, certifications, and achievements.";
+
+break;
+
+
+
+case "Blog Website":
+
+roadmap=[
+"HTML & CSS",
+"JavaScript",
+"Backend Basics",
+"Database Integration",
+"Blog CRUD Operations",
+"Deployment"
+];
+
+successScore+=3;
+
+complexityScore+=5;
+
+explanation=
+"Blog projects help developers understand CRUD operations and database management.";
+
+break;
+
+
+
+case "Task Manager":
+
+roadmap=[
+"JavaScript Fundamentals",
+"Frontend Development",
+"CRUD Operations",
+"Authentication",
+"Database Design",
+"Deployment"
+];
+
+successScore+=4;
+
+complexityScore+=8;
+
+explanation=
+"Task Manager projects are one of the best beginner-to-intermediate full-stack projects.";
+
+break;
+
+
+
+case "E-Commerce Website":
+
+roadmap=[
+"Frontend Development",
+"Backend APIs",
+"Database Design",
+"Authentication",
+"Stripe Payment Integration",
+"Order Management",
+"Deployment"
+];
+
+complexityScore+=20;
+
+explanation=
+"E-Commerce applications teach real-world business logic, payments, and scalability.";
+
+break;
+
+
+
+case "Chat Application":
+
+roadmap=[
+"Frontend Development",
+"Node.js",
+"Socket.IO",
+"Realtime Messaging",
+"Authentication",
+"Deployment"
+];
+
+complexityScore+=15;
+
+explanation=
+"Chat applications teach realtime communication using WebSockets and event-driven systems.";
+
+break;
+
+
+
+case "Learning Management System":
+
+roadmap=[
+"Frontend Development",
+"Backend APIs",
+"Authentication",
+"Student Management",
+"Course Management",
+"Deployment"
+];
+
+complexityScore+=25;
+
+explanation=
+"Learning Management Systems simulate enterprise educational platforms.";
+
+break;
+
+
+
+case "AI Application":
+
+if(experience==="Beginner"){
+database="Not Required";
+}
+
+roadmap=[
+"Python Fundamentals",
+"Machine Learning Basics",
+"Model Building",
+"API Development",
+"Frontend Integration",
+"Deployment"
+];
+
+complexityScore+=25;
+
+successScore+=2;
+
+explanation=
+"AI Applications combine machine learning models with modern web technologies.";
+
+break;
+
+
+
+case "Social Media Platform":
+
+roadmap=[
+"Frontend Development",
+"Backend APIs",
+"Authentication",
+"Feed System",
+"Realtime Features",
+"Notifications",
+"Scaling"
+];
+
+complexityScore+=35;
+
+successScore-=5;
+
+explanation=
+"Social Media Platforms are among the most advanced full-stack applications.";
+
+break;
+
+}
+
+
+/* LIMITS */
+
+if(successScore > 100){
+successScore = 100;
+}
+
+if(complexityScore > 100){
+complexityScore = 100;
+}
+
+
+/* ROADMAP HTML */
+
+let roadmapHTML="";
+
+roadmap.forEach(step=>{
+
+roadmapHTML +=
+`<li>${step}</li>`;
+
+});
+
+
+/* OUTPUT */
+
+document.getElementById("result").style.display="block";
+
+document.getElementById(
+"recommendationContent"
+).innerHTML =
+
+`
+
+<div class="score-grid">
+
+<div class="score-card">
+
+<h3>🎯 Success Score</h3>
+
+<div class="score-number">
+${successScore}%
+</div>
+
+<div class="progress">
+<div class="progress-bar"
+style="width:${successScore}%">
+</div>
+</div>
+
+</div>
+
+<div class="score-card">
+
+<h3>📈 Complexity Score</h3>
+
+<div class="score-number">
+${complexityScore}%
+</div>
+
+<div class="progress">
+<div class="progress-bar"
+style="width:${complexityScore}%">
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+<h2 class="section-title">
+🛠 Recommended Tech Stack
+</h2>
+
+<div class="tech-grid">
+
+<div class="tech-card">
+<h4>Frontend</h4>
+${frontend}
+</div>
+
+<div class="tech-card">
+<h4>Backend</h4>
+${backend}
+</div>
+
+<div class="tech-card">
+<h4>Database</h4>
+${database}
+</div>
+
+<div class="tech-card">
+<h4>Authentication</h4>
+${auth}
+</div>
+
+<div class="tech-card">
+<h4>Hosting</h4>
+${hosting}
+</div>
+
+<div class="tech-card">
+<h4>Architecture</h4>
+${architecture}
+</div>
+
+</div>
+
+
+<h2 class="section-title">
+⏳ Estimated Learning Time
+</h2>
+
+<div class="card">
+${learningTime}
+</div>
+
+
+<h2 class="section-title">
+🛣 Recommended Roadmap
+</h2>
+
+<div class="roadmap-box">
+
+<ol>
+
+${roadmapHTML}
+
+</ol>
+
+</div>
+
+
+<h2 class="section-title">
+💡 Why This Stack?
+</h2>
+
+<div class="explanation">
+
+${explanation}
+
+</div>
+
+`;
+
+}
+
+
+function copyResults(){
+
+const text =
+document.getElementById("result").innerText;
+
+navigator.clipboard.writeText(text);
+
+alert("Recommendation copied successfully!");
+
+}
+
+
+function downloadReport(){
+
+const text =
+document.getElementById("result").innerText;
+
+const blob =
+new Blob([text],{
+type:"text/plain"
+});
+
+const a =
+document.createElement("a");
+
+a.href =
+URL.createObjectURL(blob);
+
+a.download =
+"AI_Tech_Stack_Report.txt";
+
+a.click();
+
+}
+
+
+function resetForm(){
+
+document.getElementById("projectType").value="";
+document.getElementById("experience").value="";
+document.getElementById("budget").value="";
+document.getElementById("teamSize").value="";
+
+document.getElementById("result").style.display="none";
+
+}
+
+</script>
+
+</body>
+</html>
