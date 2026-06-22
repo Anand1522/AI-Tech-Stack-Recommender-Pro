@@ -66,7 +66,7 @@ This project is part of my 30 Days 30 AI Websites Challenge where I build and pu
 - Day 3 ✅ AI Project Idea Generator
 - Day 4 ✅ AI Skill Gap Analyzer
 - Day 5 ✅ AI Interview Question Generator
-- Day 6 ✅ AI Learning Path Recommender
+- Day 6 ✅ AI Portfolio Review Analyzer
 - Day 7 ✅ AI LinkedIn Post Generator
 - Day 8 ✅ AI Salary Predictor
 - Day 9 ✅ AI Startup Idea Validator
